@@ -1,11 +1,17 @@
-#! usr/bin/env node
+#! /usr/bin/env node
 import inquirer from "inquirer";
 import chalk from "chalk";
 console.log(chalk.blue.bold("\n\t\t Welcome to the countdown timer by Abdul Samad\n"));
 let askQuestions = await inquirer.prompt([{
         name: "question",
         type: "number",
-        message: chalk.yellowBright.bold("Enter Your Number..")
+        message: chalk.yellowBright.bold("Enter Your Number.."),
+        validate: (input) => {
+            if (isNaN(input) || input <= 0) {
+                return chalk.bold.red("Please enter a valid positive number.");
+            }
+            return true;
+        }
     }]);
 console.log(" ");
 askQuestions = askQuestions.question;
